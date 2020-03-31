@@ -8,19 +8,19 @@ namespace Abc.Soft.Areas.Quantity.Pages.Measures
 {
     public class DeleteModel : MeasuresPage
     {
-        public DeleteModel(IMeasureRepository r) : base(r)
-        {
-        }
+        public DeleteModel(IMeasureRepository r) : base(r) { }
 
         public async Task<IActionResult> OnGetAsync(string id)
         {
-            var o = await db.Get(id);
-            Item = MeasureViewFactory.Create(o);
+            await getObject(id);
+
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(string id) {
-            await db.Delete(id);
+        public async Task<IActionResult> OnPostAsync(string id) 
+        {
+            await deleteObject(id);
+
             return RedirectToPage("./Index");
         }
     }

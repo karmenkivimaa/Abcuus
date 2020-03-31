@@ -1,23 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using Abc.Data.Quantity;
 using Abc.Domain.Quantity;
 using Abc.Facade.Quantity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Abc.Pages.Quantity
 {
-    public abstract class MeasuresPage : PageModel
+    public class MeasuresPage : BasePage<IMeasureRepository, Measure, MeasureView, MeasureData>
     {
-        protected internal readonly IMeasureRepository db;
-
-        protected internal MeasuresPage(IMeasureRepository r)
+        protected internal MeasuresPage(IMeasureRepository r) : base(r)
         {
-            db = r;
+            PageTitle = "Measures";
         }
-        [BindProperty]
-        public MeasureView Item { get; set; }
-        public IList<MeasureView> Items { get; set; }
 
+        public override string ItemId => Item.Id;
 
+        protected internal override Measure toObject(MeasureView view)
+        {
+            return MeasureViewFactory.Create(view);
+        }
+
+        protected internal override MeasureView toView(Measure obj)
+        {
+            return MeasureViewFactory.Create(obj);
+        }
     }
 }

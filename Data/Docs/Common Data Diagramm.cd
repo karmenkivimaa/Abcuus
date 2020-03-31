@@ -7,7 +7,7 @@
       <FileName>Money\CurrencyData.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Abc.Data.Common.DefinedEntityData">
+  <Class Name="Abc.Data.Common.DefinedEntityView">
     <Position X="1.5" Y="0.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -21,7 +21,7 @@
       <FileName>Common\NamedEntityData.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Abc.Data.Common.UniqueEntityData">
+  <Class Name="Abc.Data.Common.UniqueView">
     <Position X="6.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>

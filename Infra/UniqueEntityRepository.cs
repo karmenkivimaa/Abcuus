@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Abc.Infra
 {
     public abstract class UniqueEntityRepository<TDomain, TData>: PaginatedRepository<TDomain, TData>
-    where TData: UniqueEntityData, new()
+    where TData: UniqueView, new()
     where TDomain: Entity<TData>, new()
     {
 
@@ -14,5 +14,6 @@ namespace Abc.Infra
 
         protected override async Task<TData> getData(string id)
             => await dbSet.FirstOrDefaultAsync(m => m.Id == id);
+
     }
 }
