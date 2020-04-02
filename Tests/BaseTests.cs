@@ -1,16 +1,17 @@
-﻿using Abc.Aids;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Abc.Aids;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Abc.Tests
 {
+
     public class BaseTests
     {
+
         private const string notTested = "<{0}> is not tested";
         private const string notSpecified = "Class is not specified";
-
         private List<string> members { get; set; }
         protected Type type;
 
@@ -39,19 +40,19 @@ namespace Abc.Tests
                 members.RemoveAt(i - 1);
             }
         }
-
-        protected static void testArePropertyValuesEqual(object view, object obj2)
+        protected static void testArePropertyValuesEqual(object obj1, object obj2)
         {
-            foreach (var property in view.GetType().GetProperties())
+            foreach (var property in obj1.GetType().GetProperties())
             {
                 var name = property.Name;
                 var p = obj2.GetType().GetProperty(name);
                 Assert.IsNotNull(p, $"No property with name '{name}' found.");
-                var expected = property.GetValue(view);
+                var expected = property.GetValue(obj1);
                 var actual = p.GetValue(obj2);
                 Assert.AreEqual(expected, actual, $"For property '{name}'.");
             }
-
         }
+
     }
+
 }

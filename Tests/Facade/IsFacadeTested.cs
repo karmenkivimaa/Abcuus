@@ -11,6 +11,6 @@ namespace Abc.Tests.Facade
 
         [TestMethod] public void IsCommonTested() { isAllTested(assembly, Namespace("Common")); }
         [TestMethod] public void IsQuantityTested() { isAllTested(assembly, Namespace("Quantity")); }
-        [TestMethod] public void IsTested() { isAllTested(assembly, Namespace("Facade")); }
+        [TestMethod] public void IsTested() { isAllTested(base.Namespace("Facade")); }
     }
 }

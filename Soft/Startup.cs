@@ -32,8 +32,9 @@ namespace Abc.Soft
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
-            services.AddScoped<IMeasureRepository, MeasureRepository>();
+            services.AddScoped<IMeasuresRepository, MeasureRepository>();
             services.AddScoped<IUnitsRepository, UnitsRepository>();
+            services.AddServerSideBlazor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +63,7 @@ namespace Abc.Soft
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapBlazorHub();
             });
         }
     }

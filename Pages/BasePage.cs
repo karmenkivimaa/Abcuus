@@ -1,5 +1,4 @@
 ﻿using Abc.Aids;
-using Abc.Data.Quantity;
 using Abc.Domain.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -20,6 +19,7 @@ namespace Abc.Pages
         {
             db = r;
         }
+
         [BindProperty]
         public TView Item { get; set; }
         public IList<TView> Items { get; set; }
@@ -27,6 +27,15 @@ namespace Abc.Pages
 
         public string PageTitle { get; set; }
         public string PageSubTitle => getPageSubTitle();
+        public string IndexUrl => getIndexUrl();
+
+        protected internal string getIndexUrl()
+        {
+            return $"{PageUrl}/Index?fixedFilter={FixedFilter}&fixedValue={FixedValue}";
+        }
+
+        public string PageUrl => getPageUrl();
+        protected internal abstract string getPageUrl();
 
         protected internal virtual string getPageSubTitle()
         {
@@ -54,7 +63,7 @@ namespace Abc.Pages
 
         public int TotalPages => db.TotalPages;
 
-        public string FixedFIlter 
+        public string FixedFilter 
         {
             get => db.FixedFilter;
             set => db.FixedFilter = value;
@@ -65,8 +74,10 @@ namespace Abc.Pages
             set => db.FixedValue = value;
         }
 
-        protected internal async Task<bool> addObject()
+        protected internal async Task<bool> addObject(string fixedFilter, string fixedValue)
         {
+            FixedFilter = fixedFilter;
+            FixedValue = fixedValue;
             //TODO see viga tuleb lahendada
             // To protect from overposting attacks, please enable the specific properties you want to bind to, for
             // more details see https://aka.ms/RazorPagesCRUD.
@@ -82,8 +93,10 @@ namespace Abc.Pages
 
         protected internal abstract TDomain toObject(TView item);
 
-        protected internal async Task updateObject()
+        protected internal async Task updateObject(string fixedFilter, string fixedValue)
         {
+            FixedFilter = fixedFilter;
+            FixedValue = fixedValue;
             //TODO see viga tuleb lahendada
             // To protect from overposting attacks, please enable the specific properties you want to bind to, for
             // more details see https://aka.ms/RazorPagesCRUD.
@@ -91,16 +104,20 @@ namespace Abc.Pages
             await db.Update(toObject(Item));
         }
 
-        protected internal async Task getObject(string id)
+        protected internal async Task getObject(string id, string fixedFilter, string fixedValue)
         {
+            FixedFilter = fixedFilter;
+            FixedValue = fixedValue;
             var o = await db.Get(id);
             Item = toView(o);
         }
 
         protected internal abstract TView toView(TDomain obj);
 
-        protected internal async Task deleteObject(string id)
+        protected internal async Task deleteObject(string id, string fixedFilter, string fixedValue)
         {
+            FixedFilter = fixedFilter;
+            FixedValue = fixedValue;
             await db.Delete(id);
         }
 
@@ -113,12 +130,13 @@ namespace Abc.Pages
             else if (SortOrder.EndsWith("_desc")) sortOrder = name;
             else sortOrder = name + "_desc";
 
-            return $"{page}?sortOrder={sortOrder}&currentFilter={SearchString}";
+            return $"{page}?sortOrder={sortOrder}&currentFilter={SearchString}"
+                +$"&fixedFilter={FixedFilter}&fixedValue={FixedValue}";
         }
 
         protected internal async Task getList(string sortOrder, string currentFilter, string searchString, int? pageIndex, string fixedFilter, string fixedValue)
         {
-            FixedFIlter = fixedFilter;
+            FixedFilter = fixedFilter;
             FixedValue = fixedValue;
             SortOrder = sortOrder;
             SearchString = getSearchString(currentFilter, searchString, ref pageIndex);

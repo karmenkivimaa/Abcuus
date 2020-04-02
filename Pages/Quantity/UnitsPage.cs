@@ -6,15 +6,15 @@ using System.Collections.Generic;
 
 namespace Abc.Pages.Quantity
 {
-    public class UnitsPage : BasePage<IUnitsRepository, Unit, UnitView, UnitData>
+    public abstract class UnitsPage : BasePage<IUnitsRepository, Unit, UnitView, UnitData>
     {
-        protected internal UnitsPage(IUnitsRepository r, IMeasureRepository m) : base(r)
+        protected internal UnitsPage(IUnitsRepository r, IMeasuresRepository m) : base(r)
         {
             PageTitle = "Units";
             Measures = createMeasures(m);
         }
 
-        private static IEnumerable<SelectListItem> createMeasures(IMeasureRepository r)
+        private static IEnumerable<SelectListItem> createMeasures(IMeasuresRepository r)
         {
             var list = new List<SelectListItem>();
             var measures = r.Get().GetAwaiter().GetResult();
@@ -29,7 +29,7 @@ namespace Abc.Pages.Quantity
 
         public IEnumerable<SelectListItem> Measures { get; }
 
-        public override string ItemId => Item.Id;
+        public override string ItemId => Item?.Id?? string.Empty;
 
         protected internal override string getPageSubTitle()
         {
@@ -55,5 +55,7 @@ namespace Abc.Pages.Quantity
                     return m.Text;
             return "Unspecified";
         }
+
+        protected internal override string getPageUrl() => "/Quantity/Units";
     }
 }

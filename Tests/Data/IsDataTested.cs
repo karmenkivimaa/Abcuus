@@ -10,9 +10,9 @@ namespace Abc.Tests.Data
         protected override string Namespace(string name) { return $"{assembly}.{name}"; }
 
         [TestMethod] public void IsCommonTested() { isAllTested(assembly, Namespace("Common")); }
-        [TestMethod] public void IsCMoneyTested() { isAllTested(assembly, Namespace("Money")); }
+        [TestMethod] public void IsMoneyTested() { isAllTested(assembly, Namespace("Money")); }
         [TestMethod] public void IsQuantityTested() { isAllTested(assembly, Namespace("Quantity")); }
-        [TestMethod] public void IsTested() { isAllTested(assembly, Namespace("Data")); }
+        [TestMethod] public void IsTested() { isAllTested(base.Namespace("Data")); }
 
     }
 }

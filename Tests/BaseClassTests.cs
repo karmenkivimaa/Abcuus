@@ -1,22 +1,23 @@
 using System;
 using Abc.Aids;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace Abc.Tests
 {
 
     public abstract class BaseClassTests<TClass, TBaseClass> : BaseTests
     {
+
         protected TClass obj;
 
-        [TestInitialize] public virtual void TestInitialize()
+        [TestInitialize]
+        public virtual void TestInitialize()
         {
             type = typeof(TClass);
         }
 
-        [TestMethod] public void IsInheritedTest()
+        [TestMethod]
+        public void IsInheritedTest()
         {
             Assert.AreEqual(typeof(TBaseClass), type.BaseType);
         }
@@ -47,4 +48,5 @@ namespace Abc.Tests
         }
 
     }
+
 }

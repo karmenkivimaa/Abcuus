@@ -7,11 +7,11 @@
       <FileName>Common\IRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Abc.Domain.Quantity.IMeasureRepository">
+  <Interface Name="Abc.Domain.Quantity.IMeasuresRepository">
     <Position X="5.5" Y="3" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Quantity\IMeasureRepository.cs</FileName>
+      <FileName>Quantity\IMeasuresRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Abc.Domain.Common.ICrudMethods&lt;T&gt;">
